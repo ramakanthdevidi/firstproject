@@ -1,4 +1,4 @@
-name: Build and Deploy Docker Image
+name: Build and Dockerize Project
 
 on:
   push:
@@ -9,16 +9,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      GIT_REPO_URL: 'https://github.com/ramakanthdevidi/firstproject.git'
+      CODE_DIR: 'firstproject'
+      DOCKER_IMAGE: 'ramakanthreddy709/my-app:1.0'
+
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: Clone Repository
+    - name: Clone Repository (if not already cloned)
       run: |
-        git clone --branch main https://github.com/ramakanthdevidi/firstproject.git.
-
-    - name: Maven Build
-      run: mvn clean install
-
- 
-
+        if [ ! -d "$CODE_DIR" ]; then
+          echo "Cloning repository..."
+          git clone $GIT_REPO_URL
+        else
+          echo "Repository already exists. Skipping clone."
+        fi
+    - name: Build with Maven
+      run: |
+        cd $CODE_DIR
+        echo "Building the project with Maven..."
+        mvn clean package -Dmaven.test.failure.ignore=true
+    - name: Build Docker image
+      run: |
+        cd $CODE_DIR
+        echo "Building Docker image..."
+        docker build -t $DOCKER_IMAGE .

@@ -27,10 +27,9 @@ jobs:
     - name: Build Docker Image
       run: |
         sudo chmod 666 /var/run/docker.sock
-        docker build -t ${{ secrets.IMAGE_NAME }} .
+        docker build -t firstproject-image .
 
     - name: Run Docker Container
       run: |
-        docker rm -f ${{ secrets.CONTAINER_NAME }} || true
-        docker run -d --name ${{ secrets.CONTAINER_NAME }} ${{ secrets.IMAGE_NAME }}
-
+        docker rm -f firstproject-container || true
+        docker run -d --name firstproject-container firstproject-image

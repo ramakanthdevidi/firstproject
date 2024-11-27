@@ -1,0 +1,36 @@
+name: Build and Deploy Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Choose an Ubuntu runner to ensure Docker and Maven are available
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up JDK for Maven
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'  # Adjust the version if needed
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build the project with Maven
+      run: mvn clean install
+
+    - name: Build Docker Image
+      run: |
+        sudo chmod 666 /var/run/docker.sock
+        docker build -t ${{ secrets.IMAGE_NAME }} .
+
+    - name: Run Docker Container
+      run: |
+        docker rm -f ${{ secrets.CONTAINER_NAME }} || true
+        docker run -d --name ${{ secrets.CONTAINER_NAME }} ${{ secrets.IMAGE_NAME }}
+

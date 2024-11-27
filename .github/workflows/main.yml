@@ -13,7 +13,7 @@ jobs:
       REPO_URL: 'https://github.com/ramakanthdevidi/firstproject.git'
       BRANCH: 'main'
       IMAGE_NAME: 'firstproject-image'
-      CONTAINER_NAME: 'firstproject-container'
+      CONTAINER_NAME: 'firstproject-contai'
 
     steps:
     - name: Checkout Repository

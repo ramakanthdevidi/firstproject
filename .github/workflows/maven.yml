@@ -20,13 +20,5 @@ jobs:
     - name: Maven Build
       run: mvn clean install
 
-    - name: Build Docker Image
-      run: |
-        sudo chmod 666 /var/run/docker.sock
-        docker build -t firstproject-image .
-
-    - name: Run Docker Container
-      run: |
-        docker rm -f firstproject-container || true
-        docker run -d --name firstproject-container firstproject-image
+ 
 

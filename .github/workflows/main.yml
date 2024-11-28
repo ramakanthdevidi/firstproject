@@ -36,7 +36,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '11'
-        distribution: 'adoptopenjdk'  # Optional, change if you need another JDK distribution
+        distribution: 'temurin'   # Optional, change if you need another JDK distribution
 
     # Step 6: Install Python (Version 3.8)
     - name: Set up Python 3.8

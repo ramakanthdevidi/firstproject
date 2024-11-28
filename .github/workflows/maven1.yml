@@ -12,7 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    environment:
+    env:
       REPO_URL: 'https://github.com/ramakanthdevidi/firstproject.git'
       BRANCH: 'main'
       IMAGE_NAME: 'firstproject-image'

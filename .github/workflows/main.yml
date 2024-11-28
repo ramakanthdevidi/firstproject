@@ -19,6 +19,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '11'
+        distribution: 'adoptopenjdk' 
 
     # Step 3: Install Node.js (Version 14)
     - name: Set up Node.js

@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     env:
       REPO_URL: 'https://github.com/ramakanthdevidi/firstproject.git'

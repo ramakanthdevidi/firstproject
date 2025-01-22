@@ -20,4 +20,9 @@ jobs:
       run: '#!/bin/bash
  
         mvn clean package'
+    - name: Build Docker Image
+      run: '#!/bin/bash
+
+        docker build -t mydockerhubusername/firstproject:latest .'
+    
  
